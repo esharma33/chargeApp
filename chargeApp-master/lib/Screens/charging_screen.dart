@@ -220,12 +220,17 @@ class _Charging_screenState extends State<Charging_screen> {
                                 // minimumSize: Size(50,20 ),
                               ),
                               child: Text(
-                                "Tap to Stop ",
+                                "Stop ",
                                 style: TextStyle(
-                                    fontSize: 14, color: Colors.white),
+                                    fontSize: 15, color: Colors.white),
                               ),
                               onPressed: () {
-                                Navigator.pop(context);
+                                Route route = MaterialPageRoute(
+                                    builder: (_) => Charging_summary(
+                                        duration: widget.duration,
+                                        mins: mins,
+                                        sec: sec));
+                                Navigator.push(context, route);
                               },
                             ),
                           ),

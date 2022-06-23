@@ -1,10 +1,11 @@
-import 'package:charging_app/Screens/payment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class Charging_summary extends StatefulWidget {
   int duration;
   String mins;
   String sec;
+  int rating = 0;
   Charging_summary(
       {Key? key, required this.duration, required this.mins, required this.sec})
       : super(key: key);
@@ -46,14 +47,18 @@ class _Charging_summaryState extends State<Charging_summary> {
                       color: Colors.white),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 25,
                 ),
-                BuildRow("Time Selected", "${widget.duration} mins"),
+                BuildRow("Time Selected", "${widget.duration} min"),
                 SizedBox(
                   height: 10,
                 ),
-                BuildRow("Charge Time",
-                    "${widget.mins}  mins and ${widget.sec} sec"),
+                BuildRow(
+                    "Charge Time", "${widget.mins}  min and ${widget.sec} sec"),
+                SizedBox(
+                  height: 30,
+                ),
+                BuildRow("Total Cost", " ₹ 35.42"),
                 SizedBox(
                   height: 80,
                 ),
@@ -63,6 +68,66 @@ class _Charging_summaryState extends State<Charging_summary> {
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                RatingBar(
+                  initialRating: 0,
+                  minRating: 1,
+                  direction: Axis.horizontal,
+                  //allowHalfRating: true,
+                  itemCount: 5,
+                  itemPadding: EdgeInsets.symmetric(horizontal: 6.0),
+                  ratingWidget: RatingWidget(
+                    full: Icon(
+                      Icons.star,
+                      size: 14,
+                      color: Colors.amber,
+                    ),
+                    half: Icon(
+                      Icons.star_border_outlined,
+                      size: 14,
+                      color: Colors.amber,
+                    ),
+                    empty: Icon(
+                      Icons.star_border_outlined,
+                      size: 14,
+                      color: Colors.amber,
+                    ),
+                  ),
+                  onRatingUpdate: (rating) {
+                    rating = rating;
+                    print(rating);
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey, // darker color
+                      ),
+                      BoxShadow(
+                        color: Colors.white, // background color
+                        spreadRadius: -7.0,
+                        blurRadius: 12.0,
+                      ),
+                    ],
+                  ),
+                  child: TextField(
+                    maxLines: 6,
+                    keyboardType: TextInputType.multiline,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: "Write your feedback here.",
+                      hintStyle:
+                          TextStyle(fontSize: 16, color: Colors.grey.shade500),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -103,7 +168,10 @@ class _Charging_summaryState extends State<Charging_summary> {
 
   Widget BuildRow(String parameter, String value) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.only(
+        left: 10,
+        right: 10,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

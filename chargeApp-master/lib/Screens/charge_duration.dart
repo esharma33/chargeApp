@@ -174,9 +174,9 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 DurationButton(1),
-                DurationButton(2),
-                DurationButton(3),
-                DurationButton(4),
+                DurationButton(6),
+                DurationButton(12),
+                DurationButton(24),
               ],
             ),
             SizedBox(
@@ -246,16 +246,16 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                       // minimumSize: Size(50,20 ),
                     ),
                     child: Text(
-                      "Start",
-                      style: TextStyle(fontSize: 16, color: Colors.black),
+                      "Pay  ₹40.00",
+                      style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500),
                     ),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Mypayment()));
-                      /*
                       Route route = MaterialPageRoute(
                           builder: (_) => Charging_screen(duration: _count));
-                      Navigator.push(context, route);*/
+                      Navigator.push(context, route);
                     },
                   ),
                 ),
