@@ -68,14 +68,14 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                       SizedBox(
                         height: 5,
                       ),
-                      Text(user_device_id,
+                      Text(user_device_id.toString(),
                         style: TextStyle(
                             fontSize: 16,
                             color: Colors.white,
                             fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        site_area,
+                        site_area.toString(),
                         style: TextStyle(fontSize: 13, color: Colors.white),
                       ),
                     ],

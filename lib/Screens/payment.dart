@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
+import 'charge_duration.dart';
+
 class Mypayment extends StatefulWidget {
   const Mypayment({Key? key}) : super(key: key);
 
@@ -42,6 +44,11 @@ class _MypaymentState extends State<Mypayment> {
 
   void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Fluttertoast.showToast(msg: "SUCCESS: " + response.paymentId!);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Charge_duration_screen()));
+
   }
 
   void _handlePaymentError(PaymentFailureResponse response) {
@@ -63,10 +70,22 @@ class _MypaymentState extends State<Mypayment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: ElevatedButton(
-          child: Text("paynow"),
-          onPressed: openCheckout,
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Container(
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              primary: Colors.blue,
+              padding:
+              EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+              // minimumSize: Size(50,20 ),
+            ),
+            child: Text("Pay Now", style: TextStyle(fontSize: 16, color: Colors.white),),
+            onPressed: openCheckout,
+          ),
         ),
       ),
     );

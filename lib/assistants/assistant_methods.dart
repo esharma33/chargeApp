@@ -66,7 +66,7 @@ class AssistantMethods {
       );
 
        mapResponse = jsonDecode(response.body);
-      token  = mapResponse!["customerAuthToken"];
+      token  = mapResponse?["customerAuthToken"];
       print(token);
 
       if (response.statusCode == 200) {
@@ -93,8 +93,9 @@ class AssistantMethods {
           headers: <String, String>{
             //'Content-Type': 'application/json',
 
-            HttpHeaders.authorizationHeader: 'Bearer ${token}',
-            HttpHeaders.contentTypeHeader: 'application/json',
+            'Content-Type': 'application/json',
+
+            'CustomerAuthToken': '${token}',
           });
 
       responseData = jsonDecode(response.body);
@@ -102,9 +103,12 @@ class AssistantMethods {
       print(responseData!["message"] + " successsssssss");
       print("${responseData} result is hereeeeeee");
       if (responseData["message"] == "Success") {
-        print(responseData);
-        site_area = responseData["device"]["site_area"];
-        user_device_id = responseData["device"]["device_id"];
+        Map? userData;
+       userData = responseData["device"];
+
+        print(userData);
+        site_area = userData!["site"];
+        user_device_id = userData["device_id"];
         return "Success";
 
       } else {
@@ -121,7 +125,7 @@ class AssistantMethods {
     Uri uri = Uri.parse((url));
     print(url);
     try {
-      print("hellow");
+      print("hellow token is this ${token}");
       Map? responseData;
 
       var response = await http.get(
@@ -130,14 +134,15 @@ class AssistantMethods {
           headers: <String, String>{
             //'Content-Type': 'application/json',
 
-            HttpHeaders.authorizationHeader: 'Bearer ${token}',
-            HttpHeaders.contentTypeHeader: 'application/json',
+            'Content-Type': 'application/json',
+
+            'CustomerAuthToken': '${token}',
           });
 
       responseData = jsonDecode(response.body);
 
-      print(responseData!["message"] + " successsssssss");
-      print("${responseData} result is hereeeeeee");
+      print(responseData!["message"] + " success");
+      print("${responseData} result is here");
       if (responseData["message"] == "Success") {
         print(responseData);
          subscription= responseData["device"]["site_area"];
@@ -148,15 +153,50 @@ class AssistantMethods {
         return "Not Subscribed";
       }
     } catch (err) {
-      print( "${err} is the errorrrrrrrrrrrr");
+      print( "${err} is the error");
       return "error occured";
     }
 
   }
 
+  static Future<String> review_info(int rating, String review) async {
 
+    try {
+      // var map = new Map<String, dynamic>();
+      // map['rating'] = rating;
+      // map['review'] = review;
+      //
+      // final response = await http.post(
+      //   Uri.parse('http/url/of/your/api'),
+      //   body: map,
+      // );
+      var response = await http.post(
+        Uri.parse(review_url),
+          headers: <String, String>{
+            'Content-Type': 'application/json',
 
+            'CustomerAuthToken': '${token}',
+           // HttpHeaders.contentTypeHeader: 'application/json'
+          },
+        body: jsonEncode(<String, dynamic>{
+          'rating': rating,
+          'review': review,
+        }),
+      );
 
+      print(jsonDecode(response.body));
+
+      if (response.statusCode == 200) {
+
+        return "success";
+      } else {
+        return "Feedback is not submitted. Kindly submit it again";
+      }
+    } catch (err) {
+      print(err);
+      return "An error occured";
+    }
+  }
 
 }
 

@@ -6,3 +6,4 @@ var otpverify = "http://18.214.101.54:5000/api/v1/auth/customer/verify-otp";
 var device_id_url = "${baseurl}device/device-id/";
 var subscription_url = "${baseurl}/subscription/";
 var token = "";
+var review_url = "${baseurl}customer/review";

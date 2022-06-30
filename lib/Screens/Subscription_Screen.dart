@@ -1,4 +1,5 @@
 import 'package:chargeapp_master/Screens/charge_duration.dart';
+import 'package:chargeapp_master/Screens/payment.dart';
 import 'package:flutter/material.dart';
 
 class Subscriptions extends StatefulWidget {
@@ -279,7 +280,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Charge_duration_screen()));
+                              builder: (context) => Mypayment()));
                     },
                     child: const Text(
                       "Confirm",
