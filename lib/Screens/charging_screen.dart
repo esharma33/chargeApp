@@ -193,13 +193,13 @@ class _Charging_screenState extends State<Charging_screen> {
                               ),
                             ],
                           ),
-                          Text(
-                            "₹28.87",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
-                                color: Colors.white),
-                          ),
+                          // Text(
+                          //   "₹28.87",
+                          //   style: TextStyle(
+                          //       fontWeight: FontWeight.w500,
+                          //       fontSize: 18,
+                          //       color: Colors.white),
+                          // ),
                         ],
                       ),
                       SizedBox(

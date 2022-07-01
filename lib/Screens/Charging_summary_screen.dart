@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -60,11 +61,11 @@ class _Charging_summaryState extends State<Charging_summary> {
                     height: 10,
                   ),
                   BuildRow(
-                      "Charge Time", "${widget.mins}  min and ${widget.sec} sec"),
+                      "Charge Time left", "${widget.mins}  min and ${widget.sec} sec"),
                   SizedBox(
                     height: 30,
                   ),
-                  BuildRow("Total Cost", " ₹ 35.42"),
+                  //BuildRow("Total Cost", " ₹ 35.42"),
                   SizedBox(
                     height: 80,
                   ),
@@ -137,7 +138,7 @@ class _Charging_summaryState extends State<Charging_summary> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 20,),
+                  SizedBox(height: 60,),
                   Container(
                     height: 50,
                     width: double.infinity,
@@ -170,6 +171,7 @@ class _Charging_summaryState extends State<Charging_summary> {
                           if(result == "success") {
                             Fluttertoast.showToast(
                                 msg: "Your feedBack has been submitted.");
+                            SystemNavigator.pop();
                             print("submitted the feedback");
                           }
                           else if(result == "Feedback is not submitted. Kindly submit it again"){

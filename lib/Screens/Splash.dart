@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:chargeapp_master/Screens/login_screen.dart';
+import 'package:chargeapp_master/Screens/qr_sacn_screen.dart';
+import 'package:chargeapp_master/api_config.dart';
 import 'package:flutter/material.dart';
 
 class MySplashScreen extends StatefulWidget {
@@ -17,7 +19,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
     Timer(
         const Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const Login())));
+            context, MaterialPageRoute(builder: (context) => token == "" ? Login() : Qr_scan_screen())));
   }
 
   @override

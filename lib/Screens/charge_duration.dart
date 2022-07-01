@@ -33,235 +33,248 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        padding: EdgeInsets.all(20),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        padding: EdgeInsets.only(top: 30, bottom: 50, left: 20,right: 20),
+        child: Stack(
           children: [
-            SizedBox(
-              height: 30,
-            ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    size: 25,
-                    color: Colors.white,
-                  ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                 // mainAxisAlignment: MainAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        size: 25,
+                        color: Colors.white,
+                      ),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width *0.25
+                    ),
+                    Center(
+                      child: Container(
+                     //   padding: EdgeInsets.only(left: 30),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              backgroundImage: AssetImage("assets/parking.jpg"),
+                              radius: 25,
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(user_device_id.toString(),
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              site_area.toString(),
+                              style: TextStyle(fontSize: 13, color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  width: 70,
+                  height: 50,
                 ),
-                Center(
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage("assets/parking.jpg"),
-                        radius: 25,
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(user_device_id.toString(),
-                        style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      Text(
-                        site_area.toString(),
-                        style: TextStyle(fontSize: 13, color: Colors.white),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 50,
-            ),
-            Text(
-              "Set duration",
-              style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.white),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      onSurface: Colors.blue,
-                      //primary: Colors.grey,
-                      padding: EdgeInsets.all(10),
-                      minimumSize: Size(65, 50),
-                    ),
-                    onPressed: _decreaseCount,
-                    child: Icon(
-                      Icons.remove,
-                      color: Colors.white,
-                      size: 16,
-                    )),
-                SizedBox(
-                  width: 10,
-                ),
-                Container(
-                  height: 51,
-                  width: 221,
-                  //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.grey, //New
-                          blurRadius: 4.0,
-                          offset: Offset(0, 0))
-                    ],
-                  ),
-                  child: Container(
-                    height: 50,
-                    width: 220,
-                    padding: EdgeInsets.symmetric(horizontal: 85, vertical: 18),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white60,
-                    ),
-                    child: Text(
-                      "$_count min",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      onSurface: Colors.blue,
-                      //primary: Colors.grey,
-                      padding: EdgeInsets.all(10),
-                      minimumSize: Size(65, 50),
-                    ),
-                    onPressed: _increaseCount,
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 14,
-                    )),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                DurationButton(1),
-                DurationButton(6),
-                DurationButton(12),
-                DurationButton(24),
-              ],
-            ),
-            SizedBox(
-              height: 40,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
                 Text(
-                  "Timer",
+                  "Set duration",
                   style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 17,
                       fontWeight: FontWeight.w500,
                       color: Colors.white),
                 ),
                 SizedBox(
-                  width: 15,
+                  height: 10,
                 ),
-                CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  radius: 10,
-                  child: Text(
-                    "?",
-                    style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Timer("15 min", 1),
-                SizedBox(
-                  width: 10,
-                ),
-                Timer("30 min", 2),
-                SizedBox(
-                  width: 10,
-                ),
-                Timer("Not now ", 3),
-                SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 150,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
-                      primary: Colors.green.shade100,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                      // minimumSize: Size(50,20 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          onSurface: Colors.blue,
+                          //primary: Colors.grey,
+                          padding: EdgeInsets.all(10),
+                          minimumSize: Size(65, 50),
+                        ),
+                        onPressed: _decreaseCount,
+                        child: Icon(
+                          Icons.remove,
+                          color: Colors.white,
+                          size: 16,
+                        )),
+                    SizedBox(
+                      width: 10,
                     ),
-                    child: Text(
-                      "Pay  ₹40.00",
+                    Container(
+                      height: 51,
+                      width: 221,
+                      //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.grey, //New
+                              blurRadius: 4.0,
+                              offset: Offset(0, 0))
+                        ],
+                      ),
+                      child: Container(
+                        height: 50,
+                        width: 220,
+                        padding: EdgeInsets.symmetric(horizontal: 85, vertical: 18),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.white60,
+                        ),
+                        child: Text(
+                          "$_count min",
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10)),
+                          onSurface: Colors.blue,
+                          //primary: Colors.grey,
+                          padding: EdgeInsets.all(10),
+                          minimumSize: Size(65, 50),
+                        ),
+                        onPressed: _increaseCount,
+                        child: Icon(
+                          Icons.add,
+                          color: Colors.white,
+                          size: 14,
+                        )),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    DurationButton(1),
+                    DurationButton(6),
+                    DurationButton(12),
+                    DurationButton(24),
+                  ],
+                ),
+                SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Timer",
                       style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
                     ),
-                    onPressed: () {
-                      Route route = MaterialPageRoute(
-                          builder: (_) => Charging_screen(duration: _count));
-                      Navigator.push(context, route);
-                    },
-                  ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    CircleAvatar(
+                      backgroundColor: Colors.blue,
+                      radius: 10,
+                      child: Text(
+                        "?",
+                        style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Timer("15 min", 1),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Timer("30 min", 2),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Timer("Not now ", 3),
+                    SizedBox(
+                      width: 10,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 150,
                 ),
               ],
             ),
+                Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            primary: Colors.green.shade100,
+                            padding:
+                                EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                            // minimumSize: Size(50,20 ),
+                          ),
+                          child: Text(
+                            "Start",
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          onPressed: () {
+                            Route route = MaterialPageRoute(
+                                builder: (_) => Charging_screen(duration: _count));
+                            Navigator.push(context, route);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+
           ],
         ),
       ),
