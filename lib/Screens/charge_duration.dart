@@ -13,7 +13,7 @@ class Charge_duration_screen extends StatefulWidget {
 }
 
 class _Charge_duration_screenState extends State<Charge_duration_screen> {
-  int _count = 0;
+  int _count = 1;
   int? _value = 1;
   void _increaseCount() {
     setState(() {
@@ -33,7 +33,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        padding: EdgeInsets.only(top: 30, bottom: 50, left: 20,right: 20),
+        padding: EdgeInsets.only(top: 20, bottom: 50, left: 20,right: 20),
         child: Stack(
           children: [
             Column(
@@ -123,11 +123,11 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                           size: 16,
                         )),
                     SizedBox(
-                      width: 10,
+                      width: 11,
                     ),
                     Container(
                       height: 51,
-                      width: 221,
+                      width: 222,
                       //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
@@ -141,7 +141,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                       child: Container(
                         height: 50,
                         width: 220,
-                        padding: EdgeInsets.symmetric(horizontal: 85, vertical: 18),
+                        padding: EdgeInsets.symmetric(horizontal: 86, vertical: 18),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white60,
@@ -156,7 +156,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                       ),
                     ),
                     SizedBox(
-                      width: 10,
+                      width: 11,
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -179,7 +179,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                   height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     DurationButton(1),
                     DurationButton(6),
