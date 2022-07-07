@@ -19,7 +19,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
     Timer(
         const Duration(seconds: 5),
         () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => token == "" ? Login() : Qr_scan_screen())));
+            context, MaterialPageRoute(builder: (context) => token.isEmpty ? Login() : Qr_scan_screen())));
   }
 
   @override

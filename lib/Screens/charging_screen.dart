@@ -3,6 +3,7 @@ import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../User Details.dart';
 import 'Charging_summary_screen.dart';
 
 class Charging_screen extends StatefulWidget {
@@ -180,14 +181,14 @@ class _Charging_screenState extends State<Charging_screen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Powerstrip O51 AQ",
+                                user_device_id.toString(),
                                 style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400),
                               ),
-                              Text(
-                                "PS 190087HJIM78",
+                              Text(user_device_id.toString(),
+
                                 style:
                                     TextStyle(fontSize: 11, color: Colors.grey),
                               ),

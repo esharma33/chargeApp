@@ -1,6 +1,9 @@
 import 'package:chargeapp_master/Screens/charge_duration.dart';
 import 'package:chargeapp_master/Screens/payment.dart';
+import 'package:chargeapp_master/User%20Details.dart';
+import 'package:chargeapp_master/assistants/assistant_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class Subscriptions extends StatefulWidget {
   const Subscriptions({Key? key}) : super(key: key);
@@ -68,7 +71,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                                     });
                                   }),
                               const Text(
-                                "Basic",
+                                "Monthly",
                                 style: TextStyle(color: Colors.white, fontSize: 20),
                               ),
                               Container(
@@ -81,7 +84,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                                   ),
                                 ),
                                 margin: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width - 270),
+                                    left: MediaQuery.of(context).size.width - 280),
                                 height: 30,
                                 width: 120,
                                 decoration: BoxDecoration(
@@ -103,16 +106,16 @@ class _SubscriptionsState extends State<Subscriptions> {
                                   fontWeight: FontWeight.w600),
                             ),
                           ),
-                          const Padding(
-                            padding: const EdgeInsets.only(left: 20.0, top: 10),
-                            child: Text(
-                              "Upto 60 hours of charging per month ",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          )
+                          // const Padding(
+                          //   padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          //   child: Text(
+                          //     "Upto 60 hours of charging per month ",
+                          //     style: TextStyle(
+                          //         color: Colors.white,
+                          //         fontSize: 15,
+                          //         fontWeight: FontWeight.w600),
+                          //   ),
+                          // )
                         ]),
                   ),
                   const SizedBox(
@@ -147,7 +150,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                             children: [
                               Radio(
                                   activeColor: Colors.blue,
-                                  value: "Standard",
+                                  value: "Half",
                                   groupValue: _value,
                                   onChanged: (value) {
                                     setState(() {
@@ -155,7 +158,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                                     });
                                   }),
                               const Text(
-                                "Standard",
+                                "Half yearly",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 20,
@@ -171,7 +174,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                                   ),
                                 ),
                                 margin: EdgeInsets.only(
-                                    left: MediaQuery.of(context).size.width - 300),
+                                    left: MediaQuery.of(context).size.width - 305),
                                 height: 30,
                                 width: 120,
                                 decoration: BoxDecoration(
@@ -184,88 +187,89 @@ class _SubscriptionsState extends State<Subscriptions> {
                           const Padding(
                             padding: const EdgeInsets.only(left: 20.0),
                             child: Text(
-                              "₹699/- per month",
+                              "₹999/- for six month",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600),
                             ),
                           ),
-                          const Padding(
-                            padding: const EdgeInsets.only(left: 20.0, top: 10),
-                            child: Text(
-                              "Upto 240 hours of charging per month ",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          )
+                          // const Padding(
+                          //   padding: const EdgeInsets.only(left: 20.0, top: 10),
+                          //   child: Text(
+                          //     "Upto 240 hours of charging per month ",
+                          //     style: TextStyle(
+                          //         color: Colors.black,
+                          //         fontSize: 15,
+                          //         fontWeight: FontWeight.w600),
+                          //   ),
+                          // )
                         ]),
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    height: 120,
-                    width: double.maxFinite,
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          const BoxShadow(
-                              color: Colors.black,
-                              spreadRadius: .3,
-                              blurRadius: 4,
-                              offset: Offset(0, 5)),
-                          BoxShadow(
-                              color: Colors.grey.shade800,
-                              spreadRadius: .1,
-                              blurRadius: 3,
-                              offset: Offset(-5, 0))
-                        ],
-                        color: Color(0xff1B1D20),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Radio(
-                                  activeColor: Colors.blue,
-                                  value: "Premium",
-                                  groupValue: _value,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      _value = value as String;
-                                    });
-                                  }),
-                              const Text(
-                                "Premium",
-                                style: TextStyle(color: Colors.white, fontSize: 20),
-                              )
-                            ],
-                          ),
-                          const Padding(
-                            padding: const EdgeInsets.only(left: 20.0),
-                            child: Text(
-                              "₹1299/- per month",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          const Padding(
-                            padding: const EdgeInsets.only(left: 20.0, top: 10),
-                            child: Text(
-                              "Upto 360 hours of charging per month ",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          )
-                        ]),
-                  ),
+                  // const SizedBox(
+                  //   height: 20,
+                  // ),
+                  // Container(
+                  //   height: 120,
+                  //   width: double.maxFinite,
+                  //   decoration: BoxDecoration(
+                  //       boxShadow: [
+                  //         const BoxShadow(
+                  //             color: Colors.black,
+                  //             spreadRadius: .3,
+                  //             blurRadius: 4,
+                  //             offset: Offset(0, 5)),
+                  //         BoxShadow(
+                  //             color: Colors.grey.shade800,
+                  //             spreadRadius: .1,
+                  //             blurRadius: 3,
+                  //             offset: Offset(-5, 0))
+                  //       ],
+                  //       color: Color(0xff1B1D20),
+                  //       borderRadius: BorderRadius.circular(10)),
+                  //   // child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       Row(
+                    //         children: [
+                    //           Radio(
+                    //               activeColor: Colors.blue,
+                    //               value: "Premium",
+                    //               groupValue: _value,
+                    //               onChanged: (value) {
+                    //                 setState(() {
+                    //                   _value = value as String;
+                    //                 });
+                    //               }),
+                    //           const Text(
+                    //             "Premium",
+                    //             style: TextStyle(color: Colors.white, fontSize: 20),
+                    //           )
+                    //         ],
+                    //       ),
+                    //       const Padding(
+                    //         padding: const EdgeInsets.only(left: 20.0),
+                    //         child: Text(
+                    //           "₹1299/- per month",
+                    //           style: TextStyle(
+                    //               color: Colors.white,
+                    //               fontSize: 15,
+                    //               fontWeight: FontWeight.w600),
+                    //         ),
+                    //       ),
+                    //       const Padding(
+                    //         padding: const EdgeInsets.only(left: 20.0, top: 10),
+                    //         child: Text(
+                    //           "Upto 360 hours of charging per month ",
+                    //           style: TextStyle(
+                    //               color: Colors.white,
+                    //               fontSize: 15,
+                    //               fontWeight: FontWeight.w600),
+                    //         ),
+                     //     )
+
+
+
                    SizedBox(
                     height: 40,
                   ),
@@ -280,13 +284,18 @@ class _SubscriptionsState extends State<Subscriptions> {
                   height: 60,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(primary: Color(0xffB6F2CF)),
-                      onPressed: () {
+                      onPressed: () async {
 
-
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Mypayment()));
+                        var result = await AssistantMethods.updateSubscription(
+                            _value.toUpperCase(), id);
+                        print(result + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+                        if (result == "success") {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Mypayment()));
+                        } else
+                          Fluttertoast.showToast(msg: "Please select any one plan.");
                       },
                       child: const Text(
                         "Confirm",

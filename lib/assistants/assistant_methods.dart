@@ -109,6 +109,7 @@ class AssistantMethods {
         print(userData);
         site_area = userData!["site"];
         user_device_id = userData["device_id"];
+        id = userData["id"];
         return "Success";
 
       } else {
@@ -121,7 +122,7 @@ class AssistantMethods {
 
   }
   static Future<String> check_subscribed(String device_id) async{
-    String url = subscription_url + device_id;
+    String url = subscription_url + id;
     Uri uri = Uri.parse((url));
     print(url);
     try {
@@ -141,11 +142,11 @@ class AssistantMethods {
 
       responseData = jsonDecode(response.body);
 
-      print(responseData!["message"] + " success");
+      print(responseData!["message"] + " successssssssssssssssss subscriptionnn messagee");
       print("${responseData} result is here");
-      if (responseData["message"] == "Success") {
-        print(responseData);
-         subscription= responseData["device"]["site_area"];
+      if (responseData["status"] == "success") {
+        print("${responseData}  subscribeddd");
+         subscription= responseData["subscription"]["subscription_type"];
 
         return "Yes";
 
@@ -198,6 +199,39 @@ class AssistantMethods {
       return "An error occured";
     }
   }
+  static Future<String> updateSubscription(String subscription_type, String device_id) async {
+
+    try {
+      Map? mapResponse;
+      print(subscription_type +"  " +  device_id );
+      var response = await http.post(
+        Uri.parse(postSubscription_url),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'CustomerAuthToken': '${token}',
+        },
+        body: jsonEncode(<String, String>{
+          'subscription_type': subscription_type,
+          'device_id': id,
+        }),
+      );
+
+      mapResponse = jsonDecode(response.body);
+      print("${mapResponse} responddddddddddddddddddddd");
+      print(token);
+
+      if (response.statusCode == 200) {
+        print("successsss");
+        return "success";
+
+      } else {
+        return "Please choose any one plan.";
+      }
+    } catch (err) {
+      return "An error occured";
+    }
+  }
+
 
 }
 

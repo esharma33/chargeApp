@@ -1,6 +1,10 @@
 import 'dart:io' show Platform;
+import 'package:chargeapp_master/Screens/Subscription_Screen.dart';
+import 'package:chargeapp_master/Screens/charge_duration.dart';
 import 'package:chargeapp_master/Screens/device_id_input_screen.dart';
+import 'package:chargeapp_master/assistants/assistant_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
@@ -13,7 +17,7 @@ class Qr_scan_screen extends StatefulWidget {
 
 class _Qr_scan_screenState extends State<Qr_scan_screen> {
   Barcode? result;
-  String? device_id;
+  String device_id = "";
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -41,10 +45,40 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
       controller?.scannedDataStream
           .listen((result) => setState(() => this.result = result));
            device_id = result!.code.toString();
-      print(result!.code);
+
+      var response = await AssistantMethods.device_info(device_id);
+      print(response +  "------------------------------------");
+      if(device_id=="")
+        Fluttertoast.showToast(msg: "Please enter the device id.");
+
+      if(response == "Success"){
+        Fluttertoast.showToast(msg: "logging in");
+        print("logging in");
+        var subscribed = await AssistantMethods.check_subscribed(device_id);
+        if(subscribed == "Yes"){
+          Route route = MaterialPageRoute(
+              builder: (_) => Charge_duration_screen());
+          Navigator.push(context, route);
+
+        }else {
+          Route route = MaterialPageRoute(
+              builder: (_) => Subscriptions());
+          Navigator.push(context, route);
+        }
+      }
+
+      else if(response == "Wrong Device Id") {
+        Fluttertoast.showToast(
+            msg: "The device Id you enetered does not exist.");
+      }
+      else{
+        Fluttertoast.showToast(msg: "An error occured");
+        //   print("logging in");
+      }
+        }
       controller!.dispose();
     }
-  }
+
 
   @override
   Widget build(BuildContext context) {

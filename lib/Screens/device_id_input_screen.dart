@@ -113,6 +113,9 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
 
                               var result = await AssistantMethods.device_info(device_id);
                               print(result + "------------------------------------");
+                              if(device_id=="")
+                                Fluttertoast.showToast(msg: "Please enter the device id.");
+
                               if(result == "Success"){
                                       Fluttertoast.showToast(msg: "logging in");
                                       print("logging in");
@@ -129,9 +132,9 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
                                       }
     }
 
-                              else if(result == "Wrong Device Id"){
-                                Fluttertoast.showToast(msg: "The device Id you enetered does not exist.");
-
+                              else if(result == "Wrong Device Id") {
+                                Fluttertoast.showToast(
+                                    msg: "The device Id you enetered does not exist.");
                               }
                               else{
                                 Fluttertoast.showToast(msg: "An error occured");

@@ -13,7 +13,7 @@ class Charge_duration_screen extends StatefulWidget {
 }
 
 class _Charge_duration_screenState extends State<Charge_duration_screen> {
-  int _count = 1;
+  int _count = 30;
   int? _value = 1;
   void _increaseCount() {
     setState(() {
@@ -114,7 +114,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                           onSurface: Colors.blue,
                           //primary: Colors.grey,
                           padding: EdgeInsets.all(10),
-                          minimumSize: Size(65, 50),
+                          minimumSize: Size(63, 45),
                         ),
                         onPressed: _decreaseCount,
                         child: Icon(
@@ -123,10 +123,10 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                           size: 16,
                         )),
                     SizedBox(
-                      width: 11,
+                      width: 10,
                     ),
                     Container(
-                      height: 51,
+                      height: 50,
                       width: 222,
                       //   padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
                       decoration: BoxDecoration(
@@ -139,9 +139,9 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                         ],
                       ),
                       child: Container(
-                        height: 50,
+                        height: 49,
                         width: 220,
-                        padding: EdgeInsets.symmetric(horizontal: 86, vertical: 18),
+                        padding: EdgeInsets.symmetric(horizontal: 85, vertical: 17),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white60,
@@ -156,7 +156,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                       ),
                     ),
                     SizedBox(
-                      width: 11,
+                      width: 9,
                     ),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -164,8 +164,8 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                               borderRadius: BorderRadius.circular(10)),
                           onSurface: Colors.blue,
                           //primary: Colors.grey,
-                          padding: EdgeInsets.all(10),
-                          minimumSize: Size(65, 50),
+                          padding: EdgeInsets.all(9),
+                          minimumSize: Size(63, 50),
                         ),
                         onPressed: _increaseCount,
                         child: Icon(
@@ -181,10 +181,10 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    DurationButton(1),
-                    DurationButton(6),
-                    DurationButton(12),
-                    DurationButton(24),
+                    DurationButton(30),
+                    DurationButton(60),
+                    DurationButton(120),
+                    DurationButton(240),
                   ],
                 ),
                 SizedBox(
