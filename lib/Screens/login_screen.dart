@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:chargeapp_master/Screens/otp_screen.dart';
 import 'package:chargeapp_master/assistants/assistant_methods.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +86,8 @@ class _LoginState extends State<Login> {
                     children: [
                       Row(children: [
                         Container(
-                          padding: EdgeInsets.only(left: 2, right: 1),
+                          margin: EdgeInsets.all(0),
+                          padding: EdgeInsets.only(left: 2, right: 1, top: 0),
                           decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(10)),
@@ -107,17 +110,19 @@ class _LoginState extends State<Login> {
                         Expanded(
                           child: TextField(
                             controller: controller,
+                            maxLength: 10,
                             decoration: InputDecoration(
                                 hintText: "Enter Mobile Number",
                                 filled: true,
+                                counterText: "",
                                 fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(15))),
                             keyboardType: TextInputType.phone,
                             onChanged: (String value) {
                               if (value.length == 10) {
-                                mobileNo = value;
-                                print(mobileNo);
+                                mobileNo = value; //check for >10
+
                               }
                             },
                           ),
@@ -134,55 +139,36 @@ class _LoginState extends State<Login> {
                           color: const Color(0xffB6F2CF),
                         ),
                         child: TextButton(
+                          style: ButtonStyle(
+                              overlayColor: MaterialStateColor.resolveWith(
+                                  (states) => Colors.greenAccent),
+                              animationDuration: Duration(seconds: 3)),
                           onPressed: () async {
-                            if (mobileNo.length != 10) {
+                            if (!AssistantMethods.isPhoneNoValid(mobileNo)) {
                               Fluttertoast.showToast(
-                                  msg: "Mobile Number is invalid");
+                                  msg: "Phone Number is invalid");
                             } else if (mobileNo.length == 10) {
                               var output =
                                   await AssistantMethods.generateOtp(mobileNo);
                               if (output == "success") {
                                 print(output);
                                 Fluttertoast.showToast(
-                                    msg: "Otp Sent Successfully");
+                                    msg: "OTP Sent Successfully");
+                                var mobileref = mobileNo;
 
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: ((context) =>
-                                            VerifyOtp(mobilenum: mobileNo))));
+                                            VerifyOtp(mobilenum: mobileref))));
+
+                                controller.text = "";
+                                mobileNo = "";
                               }
                             } else {
                               Fluttertoast.showToast(
                                   msg: "OTP not sent Error Occurred");
                             }
-                            /* 
-                          for ui flow testing directly navigating to verify page else execute the below code
-                            if (mobileNo.length > 9) {
-                              setState(() {
-                                isAPICallProcess = true;
-                              });
-                              AssistantMethods.otplogin(mobileNo).then(
-                                (response) async {
-                                  setState(() {
-                                    isAPICallProcess = false;
-                                  });
-                                  print("response data");
-                                  print(response?.status);
-                                  if (response?.status != null ||
-                                      response?.status == "success") {
-                                    print("coming here");
-                                    Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                VerifyOtp(mobilenum: mobileNo)),
-                                        (route) => false);
-                                  }
-                                },
-                              );
-                            }
-                            */
                           },
                           child: const Text(
                             "Request OTP",

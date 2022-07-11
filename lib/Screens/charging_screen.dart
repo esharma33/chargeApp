@@ -225,12 +225,13 @@ class _Charging_screenState extends State<Charging_screen> {
                                     fontSize: 15, color: Colors.white),
                               ),
                               onPressed: () {
-                                Route route = MaterialPageRoute(
-                                    builder: (_) => Charging_summary(
-                                        duration: widget.duration,
-                                        mins: mins,
-                                        sec: sec));
-                                Navigator.push(context, route);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Charging_summary(
+                                            duration: widget.duration,
+                                            mins: mins,
+                                            sec: sec)));
                               },
                             ),
                           ),

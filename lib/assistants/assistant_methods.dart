@@ -8,12 +8,12 @@ import 'package:chargeapp_master/User%20Details.dart';
 import 'package:chargeapp_master/assistants/request_assistant.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../api_config.dart';
 
 class AssistantMethods {
-
   static Future<String> searchAddressForGeographicCoOrdinates(Position position,
       context) async {
     String apiUrl =
@@ -49,8 +49,8 @@ class AssistantMethods {
     }
   }
 
-
   static Future<String> validateOtp(String mobilenumber, String otp) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
 
     try {
       Map? mapResponse;
@@ -65,10 +65,11 @@ class AssistantMethods {
         }),
       );
 
-       mapResponse = jsonDecode(response.body);
-      token  = mapResponse?["customerAuthToken"];
-      print(token);
-
+      mapResponse = jsonDecode(response.body);
+      print(mapResponse?["customerAuthToken"] + "tokennnnnnnnnnnnnnn");
+      logintoken = mapResponse?["customerAuthToken"];
+      prefs.setString('logintoken', logintoken);
+       tokenforshared = logintoken;
       if (response.statusCode == 200) {
         return "success";
       } else {
@@ -79,7 +80,7 @@ class AssistantMethods {
     }
   }
 
-  static Future<String> device_info(String device_id) async{
+  static Future<String> device_info(String device_id) async {
     String url = device_id_url + device_id;
     Uri uri = Uri.parse((url));
     print(url);
@@ -87,15 +88,14 @@ class AssistantMethods {
       print("hellow");
       Map? responseData;
 
-      var response = await http.get(
-        uri,
-        //  Uri.parse(device_id_url + "device-id=" + device_id),
+      var response = await http.get(uri,
+          //  Uri.parse(device_id_url + "device-id=" + device_id),
           headers: <String, String>{
             //'Content-Type': 'application/json',
 
             'Content-Type': 'application/json',
 
-            'CustomerAuthToken': '${token}',
+            'CustomerAuthToken': '$tokenforshared',
           });
 
       responseData = jsonDecode(response.body);
@@ -104,135 +104,128 @@ class AssistantMethods {
       print("${responseData} result is hereeeeeee");
       if (responseData["message"] == "Success") {
         Map? userData;
-       userData = responseData["device"];
+        userData = responseData["device"];
 
         print(userData);
         site_area = userData!["site"];
         user_device_id = userData["device_id"];
         id = userData["id"];
         return "Success";
-
       } else {
         return "Wrong Device Id";
       }
     } catch (err) {
-      print( "${err }is the errorrrrrrrrrrrr");
+      print("${err}is the errorrrrrrrrrrrr");
       return "error occured";
     }
-
   }
-  static Future<String> check_subscribed(String device_id) async{
+
+  static Future<String> check_subscribed(String device_id) async {
+    log("$id");
     String url = subscription_url + id;
     Uri uri = Uri.parse((url));
     print(url);
     try {
-      print("hellow token is this ${token}");
+      print("hellow token is this ${tokenforshared}");
       Map? responseData;
 
-      var response = await http.get(
-          uri,
+      var response = await http.get(uri,
           //  Uri.parse(device_id_url + "device-id=" + device_id),
           headers: <String, String>{
             //'Content-Type': 'application/json',
 
             'Content-Type': 'application/json',
 
-            'CustomerAuthToken': '${token}',
+            'CustomerAuthToken': '${tokenforshared}',
           });
 
       responseData = jsonDecode(response.body);
 
-      print(responseData!["message"] + " successssssssssssssssss subscriptionnn messagee");
+      print(responseData!["message"] +
+          " successssssssssssssssss subscriptionnn messagee");
       print("${responseData} result is here");
+
       if (responseData["status"] == "success") {
         print("${responseData}  subscribeddd");
-         subscription= responseData["subscription"]["subscription_type"];
-
-        return "Yes";
-
-      } else {
-        return "Not Subscribed";
-      }
-    } catch (err) {
-      print( "${err} is the error");
+        subscription = responseData["subscription"]["subscription_type"];
+          return "Yes";
+        } else {
+          return "Not Subscribed";
+        }
+      } catch (err) {
+      print("${err} is the error");
       return "error occured";
     }
-
   }
 
-  static Future<String> review_info(int rating, String review) async {
+    static Future<String> review_info(int rating, String review) async {
+    try {
+    var response = await http.post(
+    Uri.parse(review_url),
+    headers: <String, String>{
+    'Content-Type': 'application/json',
+
+    'CustomerAuthToken': '${tokenforshared}',
+    // HttpHeaders.contentTypeHeader: 'application/json'
+    },
+    body: jsonEncode(<String, dynamic>{
+    'rating': rating,
+    'review': review,
+    }),
+    );
+
+    print("${jsonDecode(response.body)} feeedbackk!!!!");
+
+    print("${logintoken} is the tokennnnn");
+    if (response.statusCode == 200) {
+    return "success";
+    } else {
+    return "Feedback is not submitted. Kindly submit it again";
+    }
+    } catch (err) {
+    print(err);
+    return "An error occured";
+    }
+    }
+
+    static Future<String> updateSubscription(String subscription_type, String device_id) async {
 
     try {
-      // var map = new Map<String, dynamic>();
-      // map['rating'] = rating;
-      // map['review'] = review;
-      //
-      // final response = await http.post(
-      //   Uri.parse('http/url/of/your/api'),
-      //   body: map,
-      // );
-      var response = await http.post(
-        Uri.parse(review_url),
-          headers: <String, String>{
-            'Content-Type': 'application/json',
+    Map? mapResponse;
+    print(subscription_type +"  " + id);
+    var response = await http.post(
+    Uri.parse(postSubscription_url),
+    headers: <String, String>{
+    'Content-Type': 'application/json; charset=UTF-8',
+    'CustomerAuthToken': '${tokenforshared}',
+    },
+    body: jsonEncode(<String, String>{
+    'subscription_type': subscription_type,
+    'device_id': id,
+    }),
+    );
 
-            'CustomerAuthToken': '${token}',
-           // HttpHeaders.contentTypeHeader: 'application/json'
-          },
-        body: jsonEncode(<String, dynamic>{
-          'rating': rating,
-          'review': review,
-        }),
-      );
+    mapResponse = jsonDecode(response.body);
+    print("${mapResponse} responddddddddddddddddddddd");
 
-      print("${jsonDecode(response.body)} feeedbackk!!!!");
+    if (response.statusCode == 200) {
+    print("successsss");
+    return "success";
 
-     print("${token} is the tokennnnn");
-      if (response.statusCode == 200) {
-
-        return "success";
-      } else {
-        return "Feedback is not submitted. Kindly submit it again";
-      }
-    } catch (err) {
-      print(err);
-      return "An error occured";
+    } else {
+    return "${mapResponse!["message"]}";
     }
-  }
-  static Future<String> updateSubscription(String subscription_type, String device_id) async {
-
-    try {
-      Map? mapResponse;
-      print(subscription_type +"  " +  device_id );
-      var response = await http.post(
-        Uri.parse(postSubscription_url),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-          'CustomerAuthToken': '${token}',
-        },
-        body: jsonEncode(<String, String>{
-          'subscription_type': subscription_type,
-          'device_id': id,
-        }),
-      );
-
-      mapResponse = jsonDecode(response.body);
-      print("${mapResponse} responddddddddddddddddddddd");
-      print(token);
-
-      if (response.statusCode == 200) {
-        print("successsss");
-        return "success";
-
-      } else {
-        return "Please choose any one plan.";
-      }
     } catch (err) {
-      return "An error occured";
+    return "An error occured";
     }
+    }
+
+
+    static bool isPhoneNoValid(String? phoneNo) {
+    if (phoneNo == null) return false;
+    final regExp = RegExp(r'(^(?:[+0]9)?[0-9]{10,12}$)');
+    return regExp.hasMatch(phoneNo);
+    }
+
   }
-
-
-}
-
 

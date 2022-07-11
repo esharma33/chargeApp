@@ -1,8 +1,12 @@
+import 'dart:developer';
 import 'dart:io' show Platform;
 import 'package:chargeapp_master/Screens/Subscription_Screen.dart';
 import 'package:chargeapp_master/Screens/charge_duration.dart';
 import 'package:chargeapp_master/Screens/device_id_input_screen.dart';
+
 import 'package:chargeapp_master/assistants/assistant_methods.dart';
+
+import 'package:chargeapp_master/api_config.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -43,8 +47,9 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
 
   void readQr() async {
     if (result != null) {
-     device_id = result!.code;
 
+     device_id = result!.code;
+     print("${device_id} qr code scanned data..............................................");
       var response = await AssistantMethods.device_info(device_id.toString());
       print(response +  "------------------------------------");
       if(device_id=="")
@@ -75,10 +80,17 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
         //   print("logging in");
       }
         }
-       else{
-      Fluttertoast.showToast(
-          msg: "Scan QR.");
-    }
+    //    else{
+    //   Fluttertoast.showToast(
+    //       msg: "Scan QR.");
+    //
+    //   controller?.scannedDataStream
+    //       .listen((result) => setState(() => this.result = result));
+    //   device_id = result!.code.toString();
+    //   print(result!.code);
+    //   controller!.dispose();
+    //
+    // }
     
     }
 
@@ -201,6 +213,10 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
                         color: Colors.white,
                       ),
                       onPressed: () {
+                        print("token is ");
+                        print(logintoken);
+                        print(tokenforshared);
+
                         Route route =
                             MaterialPageRoute(builder: (_) => DeviceIdScreen());
                         Navigator.push(context, route);

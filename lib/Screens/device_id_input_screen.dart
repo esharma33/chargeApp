@@ -16,7 +16,6 @@ class DeviceIdScreen extends StatefulWidget {
 class _DeviceIdScreenState extends State<DeviceIdScreen> {
   final _textDeviceController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +73,7 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
                         padding: EdgeInsets.all(18),
                         child: TextField(
                           controller: _textDeviceController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             //labelText: "Enter device ID here ",
                             hintText: "Enter device Id here",
 
@@ -87,17 +86,17 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
                   Expanded(
                     flex: 1,
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(10.0),
-                              bottomRight: Radius.circular(10.0)),
+                        style: ElevatedButton.styleFrom(
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(10.0),
+                                bottomRight: Radius.circular(10.0)),
+                          ),
+                          primary: Colors.blue,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15, vertical: 11),
+                          // minimumSize: Size(50,20 ),
                         ),
-                        primary: Colors.blue,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 15, vertical: 11),
-                        // minimumSize: Size(50,20 ),
-                      ),
                       child: Icon(
                         Icons.arrow_forward,
                         size: 30,
@@ -139,10 +138,10 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
                               else{
                                 Fluttertoast.showToast(msg: "An error occured");
                              //   print("logging in");
-                              }
-                            }
-                    //  },
-                    ),
+
+                        }
+                          },
+                        ),
                   ),
                 ],
               )

@@ -118,6 +118,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   child: Column(
                     children: [
                       PinFieldAutoFill(
+                        //unfocus and clear otp fields
                         keyboardType: TextInputType.number,
                         decoration: UnderlineDecoration(
                           textStyle:
@@ -150,13 +151,13 @@ class _VerifyOtpState extends State<VerifyOtp> {
                           onPressed: () async {
                             if (enteredotp.length != 6) {
                               Fluttertoast.showToast(
-                                  msg: "Otp length not valid");
+                                  msg: "Please enter valid OTP");
                             } else if (enteredotp.length == 6) {
                               var result = await AssistantMethods.validateOtp(
                                   widget.mobilenum, enteredotp);
                               if (result == "success") {
                                 Fluttertoast.showToast(
-                                    msg: "Otp Verified Successfully");
+                                    msg: "OTP Verified Successfully");
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -164,7 +165,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                                             Qr_scan_screen()));
                               } else {
                                 Fluttertoast.showToast(
-                                    msg: "The Otp did not match");
+                                    msg: "The OTP did not match");
                               }
                             }
                           },
@@ -193,16 +194,17 @@ class _VerifyOtpState extends State<VerifyOtp> {
                                       print(widget.mobilenum);
                                       var output = AssistantMethods.generateOtp(
                                           widget.mobilenum);
+                                      //log("${widget.mobilenum}");
 
                                       if (output == "success") {
                                         Fluttertoast.showToast(
-                                            msg: "Otp Resent Successfully");
+                                            msg: "OTP Resent Successfully");
                                       } else {
                                         Fluttertoast.showToast(
-                                            msg: "Problem In Resending Otp");
+                                            msg: "Problem In Resending OTP");
                                       }
                                     },
-                                    child: Text("Resend Otp"),
+                                    child: Text("Resend OTP"),
                                   ))
                             ],
                           ),
@@ -244,7 +246,9 @@ class _VerifyOtpState extends State<VerifyOtp> {
                             color: Colors.white,
                           ),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print(widget.mobilenum);
+                            },
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: const [
@@ -283,11 +287,12 @@ class _VerifyOtpState extends State<VerifyOtp> {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
 
     final seconds = twoDigits(myDuration.inSeconds.remainder(60));
-
-    sec = seconds;
-    return Text(
-      ":$seconds ",
-      style: TextStyle(fontSize: 14, color: Colors.white),
+    return Visibility(
+      visible: !isresendVisible,
+      child: Text(
+        ":$seconds",
+        style: TextStyle(fontSize: 14, color: Colors.white),
+      ),
     );
   }
 }
