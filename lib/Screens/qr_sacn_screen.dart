@@ -17,7 +17,7 @@ class Qr_scan_screen extends StatefulWidget {
 
 class _Qr_scan_screenState extends State<Qr_scan_screen> {
   Barcode? result;
-  String device_id = "";
+  String? device_id = "";
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
 
@@ -25,6 +25,7 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
     setState(() => this.controller = controller);
     controller.scannedDataStream.listen((scanData) {
       setState(() => result = scanData);
+      readQr();
     });
   }
 
@@ -42,11 +43,9 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
 
   void readQr() async {
     if (result != null) {
-      controller?.scannedDataStream
-          .listen((result) => setState(() => this.result = result));
-           device_id = result!.code.toString();
+     device_id = result!.code;
 
-      var response = await AssistantMethods.device_info(device_id);
+      var response = await AssistantMethods.device_info(device_id.toString());
       print(response +  "------------------------------------");
       if(device_id=="")
         Fluttertoast.showToast(msg: "Please enter the device id.");
@@ -54,7 +53,7 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
       if(response == "Success"){
         Fluttertoast.showToast(msg: "logging in");
         print("logging in");
-        var subscribed = await AssistantMethods.check_subscribed(device_id);
+        var subscribed = await AssistantMethods.check_subscribed(device_id.toString());
         if(subscribed == "Yes"){
           Route route = MaterialPageRoute(
               builder: (_) => Charge_duration_screen());
@@ -69,14 +68,18 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
 
       else if(response == "Wrong Device Id") {
         Fluttertoast.showToast(
-            msg: "The device Id you enetered does not exist.");
+            msg: "The device Id you entered does not exist.");
       }
       else{
-        Fluttertoast.showToast(msg: "An error occured");
+        Fluttertoast.showToast(msg: "An error occurred");
         //   print("logging in");
       }
         }
-      controller!.dispose();
+       else{
+      Fluttertoast.showToast(
+          msg: "Scan QR.");
+    }
+    
     }
 
 
