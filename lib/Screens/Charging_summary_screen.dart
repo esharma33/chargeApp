@@ -1,4 +1,5 @@
 import 'package:chargeapp_master/Screens/charge_duration.dart';
+import 'package:chargeapp_master/Screens/qr_sacn_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -35,7 +36,7 @@ class _Charging_summaryState extends State<Charging_summary> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              //Navigator.pop(context);
             }),
       ),
       body: SingleChildScrollView(
@@ -94,7 +95,7 @@ class _Charging_summaryState extends State<Charging_summary> {
                               color: Colors.black,
                               fontWeight: FontWeight.w500),
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           showDialog(
                             context: context,
                             builder: (context) => Dialog(
@@ -121,7 +122,7 @@ class _Charging_summaryState extends State<Charging_summary> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        Charge_duration_screen()));
+                                                        Qr_scan_screen()));
                                           },
                                           icon: Icon(Icons.arrow_back),
                                           splashColor: Colors.black,
@@ -201,7 +202,7 @@ class _Charging_summaryState extends State<Charging_summary> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 50,
                                   ),
                                   Container(
@@ -229,7 +230,7 @@ class _Charging_summaryState extends State<Charging_summary> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (context) =>
-                                                          Charge_duration_screen()));
+                                                          const Qr_scan_screen()));
 
                                               print("submitted the feedback");
                                             } else if (result ==

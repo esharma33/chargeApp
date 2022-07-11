@@ -118,6 +118,7 @@ class _VerifyOtpState extends State<VerifyOtp> {
                   child: Column(
                     children: [
                       PinFieldAutoFill(
+                        //unfocus and clear otp fields
                         keyboardType: TextInputType.number,
                         decoration: UnderlineDecoration(
                           textStyle:
@@ -245,7 +246,9 @@ class _VerifyOtpState extends State<VerifyOtp> {
                             color: Colors.white,
                           ),
                           child: TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              print(widget.mobilenum);
+                            },
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: const [

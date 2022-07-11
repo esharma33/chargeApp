@@ -73,7 +73,7 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
                         padding: EdgeInsets.all(18),
                         child: TextField(
                           controller: _textDeviceController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             //labelText: "Enter device ID here ",
                             hintText: "Enter device Id here",
 
@@ -87,17 +87,17 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
                     flex: 1,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
+                          shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                                 topRight: Radius.circular(10.0),
                                 bottomRight: Radius.circular(10.0)),
                           ),
                           primary: Colors.blue,
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                               horizontal: 15, vertical: 11),
                           // minimumSize: Size(50,20 ),
                         ),
-                        child: Icon(
+                        child: const Icon(
                           Icons.arrow_forward,
                           size: 30,
                           color: Colors.white,
@@ -124,7 +124,8 @@ class _DeviceIdScreenState extends State<DeviceIdScreen> {
                                 Navigator.push(context, route);
                               } else {
                                 Route route = MaterialPageRoute(
-                                    builder: (_) => Subscriptions());
+                                    builder: (_) =>
+                                        Subscriptions()); //changed here
                                 Navigator.push(context, route);
                               }
                             } else if (result == "Wrong Device Id") {

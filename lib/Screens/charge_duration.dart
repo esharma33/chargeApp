@@ -33,7 +33,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        padding: EdgeInsets.only(top: 30, bottom: 50, left: 20,right: 20),
+        padding: EdgeInsets.only(top: 30, bottom: 50, left: 20, right: 20),
         child: Stack(
           children: [
             Column(
@@ -44,7 +44,7 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                   height: 30,
                 ),
                 Row(
-                 // mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   //crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     IconButton(
@@ -57,12 +57,10 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width *0.25
-                    ),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.25),
                     Center(
                       child: Container(
-                     //   padding: EdgeInsets.only(left: 30),
+                        //   padding: EdgeInsets.only(left: 30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +72,8 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(user_device_id.toString(),
+                            Text(
+                              user_device_id.toString(),
                               style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -82,7 +81,8 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                             ),
                             Text(
                               site_area.toString(),
-                              style: TextStyle(fontSize: 13, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 13, color: Colors.white),
                             ),
                           ],
                         ),
@@ -141,7 +141,8 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                       child: Container(
                         height: 50,
                         width: 220,
-                        padding: EdgeInsets.symmetric(horizontal: 85, vertical: 18),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 85, vertical: 18),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.white60,
@@ -243,38 +244,37 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                 ),
               ],
             ),
-                Align(
-                  alignment: FractionalOffset.bottomCenter,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            primary: Colors.green.shade100,
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                            // minimumSize: Size(50,20 ),
-                          ),
-                          child: Text(
-                            "Start",
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          onPressed: () {
-                            Route route = MaterialPageRoute(
-                                builder: (_) => Charging_screen(duration: _count));
-                            Navigator.push(context, route);
-                          },
-                        ),
+            Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
+                        primary: Colors.green.shade100,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                        // minimumSize: Size(50,20 ),
                       ),
-                    ],
+                      child: Text(
+                        "Start",
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      onPressed: () {
+                        Route route = MaterialPageRoute(
+                            builder: (_) => Charging_screen(duration: _count));
+                        Navigator.push(context, route);
+                      },
+                    ),
                   ),
-                ),
-
+                ],
+              ),
+            ),
           ],
         ),
       ),

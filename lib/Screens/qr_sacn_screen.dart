@@ -1,5 +1,7 @@
+import 'dart:developer';
 import 'dart:io' show Platform;
 import 'package:chargeapp_master/Screens/device_id_input_screen.dart';
+import 'package:chargeapp_master/api_config.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
@@ -40,7 +42,7 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
     if (result != null) {
       controller?.scannedDataStream
           .listen((result) => setState(() => this.result = result));
-           device_id = result!.code.toString();
+      device_id = result!.code.toString();
       print(result!.code);
       controller!.dispose();
     }
@@ -164,6 +166,10 @@ class _Qr_scan_screenState extends State<Qr_scan_screen> {
                         color: Colors.white,
                       ),
                       onPressed: () {
+                        print("token is ");
+                        print(logintoken);
+                        print(tokenforshared);
+
                         Route route =
                             MaterialPageRoute(builder: (_) => DeviceIdScreen());
                         Navigator.push(context, route);
