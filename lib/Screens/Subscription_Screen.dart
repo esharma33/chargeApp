@@ -1,3 +1,5 @@
+
+
 import 'package:chargeapp_master/Screens/charge_duration.dart';
 import 'package:chargeapp_master/Screens/payment.dart';
 import 'package:chargeapp_master/User%20Details.dart';
@@ -18,9 +20,10 @@ class Subscriptions extends StatefulWidget {
 class _SubscriptionsState extends State<Subscriptions> {
   String _value = "";
   late Razorpay razorpay;
+  var amount;
   void openCheckout() {
     var options;
-    var amount;
+
     if (_value == "Standard") {
       amount = 699 * 100;
     } else if (_value == "Basic") {
@@ -345,13 +348,14 @@ class _SubscriptionsState extends State<Subscriptions> {
                 alignment: FractionalOffset.bottomCenter,
                 child: Container(
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                  BoxDecoration(borderRadius: BorderRadius.circular(20)),
                   width: double.maxFinite,
                   height: 60,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: const Color(0xffB6F2CF)),
                       onPressed: () async {
+                        openCheckout();
                         var result = await AssistantMethods.updateSubscription(
                             _value.toUpperCase(), user_device_id!);
                         print(result + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
@@ -359,7 +363,7 @@ class _SubscriptionsState extends State<Subscriptions> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Mypayment()));
+                                  builder: (context) => Mypayment(amount: amount,)));
                         } else {
                           Fluttertoast.showToast(
                               msg: result);
@@ -376,7 +380,7 @@ class _SubscriptionsState extends State<Subscriptions> {
     );
   }
 }
-  /*Widget build(BuildContext context) {
+/*Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xff1B1D20),
       body: Container(
@@ -637,9 +641,6 @@ class _SubscriptionsState extends State<Subscriptions> {
                     //               fontWeight: FontWeight.w600),
                     //         ),
                      //     )
-
-
-
                    SizedBox(
 =======
                           const Padding(
@@ -735,7 +736,6 @@ class _SubscriptionsState extends State<Subscriptions> {
 <<<<<<< HEAD
                       style: ElevatedButton.styleFrom(primary: Color(0xffB6F2CF)),
                       onPressed: () async {
-
                         var result = await AssistantMethods.updateSubscription(
                             _value.toUpperCase(), id);
                         print(result + "&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
@@ -764,4 +764,3 @@ class _SubscriptionsState extends State<Subscriptions> {
           )),
     );
   }*/
-

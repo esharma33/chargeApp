@@ -187,11 +187,14 @@ class _Charge_duration_screenState extends State<Charge_duration_screen> {
                   height: 10,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DurationButton(30),
+                    SizedBox(width: 15,),
                     DurationButton(60),
+                    SizedBox(width: 15,),
                     DurationButton(120),
+                    SizedBox(width: 15,),
                     DurationButton(240),
                   ],
                 ),

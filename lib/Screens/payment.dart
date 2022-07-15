@@ -5,7 +5,8 @@ import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'charge_duration.dart';
 
 class Mypayment extends StatefulWidget {
-  const Mypayment({Key? key}) : super(key: key);
+  int amount = 0;
+   Mypayment({Key? key, required this.amount}) : super(key: key);
 
   @override
   State<Mypayment> createState() => _MypaymentState();
@@ -17,7 +18,7 @@ class _MypaymentState extends State<Mypayment> {
   void openCheckout() {
     var options = {
       'key': 'rzp_test_M9Z2dqY0Xc5VO6',
-      'amount': 28200,
+      'amount': widget.amount,
       'name': 'PowerStrip',
       'description': 'Payment',
       'prefill': {'contact': '8888888888', 'email': 'test@razorpay.com'},
@@ -83,7 +84,8 @@ class _MypaymentState extends State<Mypayment> {
               EdgeInsets.symmetric(horizontal: 40, vertical: 20),
               // minimumSize: Size(50,20 ),
             ),
-            child: Text("Pay Now", style: TextStyle(fontSize: 16, color: Colors.white),),
+            child: Text(
+              "Pay Now", style: TextStyle(fontSize: 16, color: Colors.white),),
             onPressed: openCheckout,
           ),
         ),

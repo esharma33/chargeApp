@@ -36,7 +36,7 @@ class _Charging_summaryState extends State<Charging_summary> {
               color: Colors.white,
             ),
             onPressed: () {
-              //Navigator.pop(context);
+              Navigator.pop(context);
             }),
       ),
       body: CustomScrollView(
@@ -44,34 +44,52 @@ class _Charging_summaryState extends State<Charging_summary> {
           SliverFillRemaining(
         hasScrollBody: false,
         child: Padding(
-          padding: EdgeInsets.only(top: 22, bottom: 20, right: 20, left: 20),
+          padding: EdgeInsets.only(top: 22, bottom: 100, right: 20, left: 20),
           child: Stack(
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Charging session summary",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: 25,
-                  ),
-                  BuildRow("Time Selected", "${widget.duration} min"),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  BuildRow("Charge Time left",
-                      "${widget.mins}  min and ${widget.sec} sec"),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  //BuildRow("Total Cost", " ₹ 35.42"),
-                 ],),
+              Container(
+                height: 200,
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade900, // darker color
+                    ),
+                    BoxShadow(
+                      color: Colors.black, // background color
+                      spreadRadius: -3.0,
+                      blurRadius: 12.0,
+                    ),
+                  ],
+
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  // only(
+                  //     bottomLeft: Radius.circular(10.0),
+                  //     topLeft: Radius.circular(10.0)),
+                  //  color: Colors.grey.shade900,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 50,),
+                    Text(
+                      "  Charging session summary",
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                    SizedBox(
+                      height: 35,
+                    ),
+                    BuildRow("Time Selected", "${widget.duration} min"),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    BuildRow("Charge Time left",
+                        "${widget.mins}  min and ${widget.sec} sec"),
+                   ],),
+              ),
 
               Align(
                 alignment: FractionalOffset.bottomCenter,

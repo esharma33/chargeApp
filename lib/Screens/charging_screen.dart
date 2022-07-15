@@ -43,7 +43,9 @@ class _Charging_screenState extends State<Charging_screen> {
     countdownTimer =
         Timer.periodic(Duration(seconds: 1), (_) => setCountDown());
   }
-
+void stoptimer(){
+    countdownTimer?.cancel();
+}
   String mins = "";
   String sec = "";
   @override
@@ -225,6 +227,8 @@ class _Charging_screenState extends State<Charging_screen> {
                                     fontSize: 15, color: Colors.white),
                               ),
                               onPressed: () {
+                                _controller.pause();
+                                 stoptimer();
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
